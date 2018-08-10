@@ -1,11 +1,11 @@
 package sk.tsystems.gamestudio.game.puzzle;
 
-import sk.tsystems.gamestudio.game.puzzle.ui.ConsoleUI;
+import sk.tsystems.gamestudio.game.puzzle.ui.PuzzleConsoleUI;
 
 public class PuzzleMain {
 
 	public void puzzle() {
-		ConsoleUI ui = new ConsoleUI();
+		PuzzleConsoleUI ui = new PuzzleConsoleUI();
 		ui.play();
 	}
 }

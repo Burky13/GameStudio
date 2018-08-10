@@ -1,4 +1,4 @@
-package sk.tsystems.gamestudio.game.GuessANumber.consoleui;
+package sk.tsystems.gamestudio.game.GuessANumber.ui;
 
 import java.util.Date;
 import java.util.Random;
@@ -8,7 +8,7 @@ import sk.tsystems.gamestudio.entity.Score;
 import sk.tsystems.gamestudio.service.ScoreService;
 import sk.tsystems.gamestudio.service.ScoreServiceJDBC;
 
-public class ConsoleUI {
+public class GuessANumberConsoleUI {
 	private int maxValue;
 	private int answear;
 	private int guess;
@@ -16,7 +16,7 @@ public class ConsoleUI {
 	private ScoreService scoreService = new ScoreServiceJDBC();
 	
 	
-	public ConsoleUI(int maxValue) {
+	public GuessANumberConsoleUI(int maxValue) {
 		this.maxValue = maxValue;
 	}
 

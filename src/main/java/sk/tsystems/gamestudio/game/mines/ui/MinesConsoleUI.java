@@ -1,4 +1,4 @@
-package sk.tsystems.gamestudio.game.mines.consoleui;
+package sk.tsystems.gamestudio.game.mines.ui;
 
 import java.util.Date;
 import java.util.Scanner;
@@ -12,14 +12,14 @@ import sk.tsystems.gamestudio.game.mines.core.Tile;
 import sk.tsystems.gamestudio.service.ScoreService;
 import sk.tsystems.gamestudio.service.ScoreServiceJDBC;
 
-public class ConsoleUI {
+public class MinesConsoleUI {
 	private Field field;
 	private ScoreService scoreService = new ScoreServiceJDBC();
 	private int score;
 	private long time;
 	private long initialTime;
 
-	public ConsoleUI() {
+	public MinesConsoleUI() {
 		this.field = new Field(9, 9, 10);
 	}
 

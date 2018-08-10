@@ -1,11 +1,11 @@
 package sk.tsystems.gamestudio.game.GuessANumber;
 
-import sk.tsystems.gamestudio.game.GuessANumber.consoleui.ConsoleUI;
+import sk.tsystems.gamestudio.game.GuessANumber.ui.GuessANumberConsoleUI;
 
 public class GuessnumberMain {
 
 	public void guessANumber() {
-		ConsoleUI ui = new ConsoleUI(100);
+		GuessANumberConsoleUI ui = new GuessANumberConsoleUI(100);
 		
 		ui.play();
 	}

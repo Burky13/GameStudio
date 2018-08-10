@@ -1,10 +1,10 @@
 package sk.tsystems.gamestudio.game.mines;
 
-import sk.tsystems.gamestudio.game.mines.consoleui.ConsoleUI;
+import sk.tsystems.gamestudio.game.mines.ui.MinesConsoleUI;
 
 public class MinesMain {
 	public void mines() {
-		ConsoleUI ui = new ConsoleUI();
+		MinesConsoleUI ui = new MinesConsoleUI();
 		ui.play();
 	}
 }

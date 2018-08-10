@@ -10,12 +10,12 @@ import sk.tsystems.gamestudio.service.ScoreService;
 import sk.tsystems.gamestudio.service.ScoreServiceFile;
 import sk.tsystems.gamestudio.service.ScoreServiceJDBC;
 
-public class ConsoleUI {
+public class PuzzleConsoleUI {
 	private Field field;
 	
 	private ScoreService scoreService = new ScoreServiceJDBC(); 
 
-	public ConsoleUI() {
+	public PuzzleConsoleUI() {
 		field = new Field(2, 2);
 	}
 
