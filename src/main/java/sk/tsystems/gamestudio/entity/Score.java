@@ -3,31 +3,46 @@ package sk.tsystems.gamestudio.entity;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
+@Entity
 public class Score implements Serializable {
+	
+	@Id
+	@GeneratedValue
+	private long id;
+	
 	private String game;
-	private String player;
+	private String username;
 	private int points;
-	private Date when;
+	private Date played_on;
 
 	public Score() {
 	}
 
-	public Score(String game,String player, int points, Date when) {
+	public Score(String game, String username, int points, Date played_on) {
 		this.game=  game;
-		this.player = player;
+		this.username = username;
 		this.points = points;
-		this.when = when;
+		this.played_on = played_on;
 	}
 
 	public String getGame() {
 		return game;
 	}
-	public String getPlayer() {
-		return player;
+	
+	public void setGame(String game) {
+		this.game = game;
+	}
+	
+	public String getUsername() {
+		return username;
 	}
 
-	public void setPlayer(String player) {
-		this.player = player;
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
 	public int getPoints() {
@@ -38,16 +53,21 @@ public class Score implements Serializable {
 		this.points = points;
 	}
 
-	public Date getWhen() {
-		return when;
+	public Date getPlayedOn() {
+		return played_on;
 	}
 
-	public void setWhen(Date when) {
-		this.when = when;
+	public void setPlayedOn(Date played_on) {
+		this.played_on = played_on;
 	}
 
 	@Override
 	public String toString() {
-		return "Score [player=" + player + ", points=" + points + ", when=" + when + "]";
+		return "Score{" +
+        "game='" + game + '\'' +
+        ", username='" + username + '\'' +
+        ", points=" + points +
+        ", playedOn=" + played_on +
+        '}';
 	}
 }

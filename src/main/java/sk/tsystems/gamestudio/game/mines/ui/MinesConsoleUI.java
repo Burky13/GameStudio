@@ -3,30 +3,36 @@ package sk.tsystems.gamestudio.game.mines.ui;
 import java.util.Date;
 import java.util.Scanner;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import sk.tsystems.gamestudio.entity.Score;
+import sk.tsystems.gamestudio.game.Game;
 import sk.tsystems.gamestudio.game.mines.core.Clue;
 import sk.tsystems.gamestudio.game.mines.core.Field;
 import sk.tsystems.gamestudio.game.mines.core.GameState;
 import sk.tsystems.gamestudio.game.mines.core.Mine;
 import sk.tsystems.gamestudio.game.mines.core.Tile;
-import sk.tsystems.gamestudio.service.ScoreService;
-import sk.tsystems.gamestudio.service.ScoreServiceJDBC;
+import sk.tsystems.gamestudio.service.ScoreService.ScoreService;
+import sk.tsystems.gamestudio.service.ScoreService.ScoreServiceJDBC;
 
-public class MinesConsoleUI {
+public class MinesConsoleUI implements Game {
 	private Field field;
-	private ScoreService scoreService = new ScoreServiceJDBC();
+	
+	@Autowired
+	private ScoreService scoreService;
+	
 	private int score;
 	private long time;
 	private long initialTime;
 
 	public MinesConsoleUI() {
-		this.field = new Field(9, 9, 10);
 	}
 
 	public void play() {
+		this.field = new Field(9, 9, 1);
 		printScores();
 		initialTime = System.currentTimeMillis();
-		
+
 		do {
 			print();
 			processInput();
@@ -39,7 +45,7 @@ public class MinesConsoleUI {
 			time = (System.currentTimeMillis() - initialTime) / 1000;
 			score = 500 - (int) time;
 			System.out.println("You solved the game in " + (time) + " sec. Score = " + score);
-			scoreService.addScore(new Score("Mines",System.getProperty("user.name"), score, new Date()));
+			scoreService.addScore(new Score("Mines", System.getProperty("user.name"), score, new Date()));
 		} else if (field.getState() == GameState.FAILED) {
 			System.out.println("You found a mine! You lost! Better luck next time, try it again.");
 		}
@@ -99,18 +105,25 @@ public class MinesConsoleUI {
 				field.openTile(row, column);
 			else
 				field.markTile(row, column);
-		} else 
+		} else
 			System.out.println("Invalid input!");
 	}
+
 	private void printScores() {
 		int index = 1;
 		System.out.println("-----------------------------");
 		System.out.println("No.  Player             Score");
 		System.out.println("-----------------------------");
-		for(Score score : scoreService.getBestScores("Mines")) {
-			System.out.printf("%3d. %-16s %5d\n", index, score.getPlayer(), score.getPoints());
+		for (Score score : scoreService.getBestScores("Mines")) {
+			System.out.printf("%3d. %-16s %5d\n", index, score.getUsername(), score.getPoints());
 			index++;
 		}
 		System.out.println("-----------------------------");
 	}
+
+	@Override
+	public String getGame() {
+		return "Mines";
+	}
+	
 }

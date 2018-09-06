@@ -1,0 +1,57 @@
+
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Minesweeper</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+<link rel="stylesheet" href="/css/stylesheet.css" />
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css"/>
+</head>
+<body>
+
+	<div th:replace="fragments::header"></div>
+	<br />
+	<br />
+	<h1 align="center">Minesweeper</h1>
+	<div align="center">
+	<a href="/minesNew">New Game</a> <span> / </span>
+	<span><a href="/minesChangeDifficulty">Set difficulty</a></span>
+	<br />
+	<span>Click:</span>
+	<span th:if="${marking}">Marking</span>
+	<span th:unless="${marking}">Opening</span>
+	<a href="/minesChangeMarking">(change)</a>
+	</div>
+
+	<div align="center">
+		State: <span th:text="${@minesController.gameState}"></span>
+	</div>
+
+	<div align="center" th:utext="${@minesController.getHTMLField()}" />
+
+
+	<!-- Alternative using Thymeleaf -->
+	<!-- 
+<table class="mines_field">
+	<tr th:each="row : ${#numbers.sequence(0, field.rowCount-1)}">
+		<td th:each="col : ${#numbers.sequence(0, field.columnCount-1)}">
+			<a th:href='@{/mines(row=${row},column=${col})}'>
+				<img th:src="@{/images/mines/{name}.png(name=${@minesController.getImageName(field.getTile(row,col))})}"/>
+			</a>
+		</td>
+	</tr>
+</table>
+ -->
+ 	<div th:replace="fragments::rating('mines')"></div>
+ 	
+	<div th:replace="fragments::addRating('mines')"></div>
+	 
+	<div th:replace="fragments::score('mines')"></div>
+	
+	<div th:replace="fragments::addComment('mines')"></div>
+	
+	<div th:replace="fragments::comment('mines')"></div>
+
+</body>
+</html>

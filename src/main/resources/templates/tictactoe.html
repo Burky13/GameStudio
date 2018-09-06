@@ -1,0 +1,46 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Puzzle</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+
+<link rel="stylesheet" href="/css/stylesheet.css" />
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css"/>
+
+</head>
+<body>
+	<div th:replace="fragments::header"></div>
+	<br />
+	<br />
+	<h1 align="center">Tic Tac Toe</h1>
+	<h3 align="center"><a href="/tictactoeNew" >New Game</a></h3>
+	<br />
+<!-- 	<a href="/puzzleChangeDifficulty">Set difficulty</a> -->
+<!-- 	<br /> -->
+	<div align="center">
+		State: <span th:text="${@ticTacToeController.GameState}"></span>
+	</div>
+	<div align="center">Turn: <span th:if="${turn}" th:text="${turn}"></span></div>
+	<div th:utext="${@ticTacToeController.getHTMLField()}" align="center"/>
+<!-- 	<hr /> -->
+	
+	<div th:if="${tictactoeMessage}" th:text="${tictactoeMessage}"
+				class="error-message">
+	</div>
+	
+	<div th:replace="fragments::rating('tictactoe')"></div>
+	
+	
+	<div th:replace="fragments::addRating('tictactoe')"></div>
+	
+	<div th:replace="fragments::score('tictactoe')"></div>
+	
+	<div th:replace="fragments::addComment('tictactoe')"></div>
+	
+	<div th:replace="fragments::comment('tictactoe')"></div>
+	
+	
+		
+</body>
+</html>

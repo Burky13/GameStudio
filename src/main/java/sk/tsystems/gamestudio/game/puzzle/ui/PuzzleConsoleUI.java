@@ -3,32 +3,47 @@ package sk.tsystems.gamestudio.game.puzzle.ui;
 import java.util.Date;
 import java.util.Scanner;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import sk.tsystems.gamestudio.entity.Score;
+import sk.tsystems.gamestudio.game.Game;
 import sk.tsystems.gamestudio.game.puzzle.core.Field;
 import sk.tsystems.gamestudio.game.puzzle.core.Tile;
-import sk.tsystems.gamestudio.service.ScoreService;
-import sk.tsystems.gamestudio.service.ScoreServiceFile;
-import sk.tsystems.gamestudio.service.ScoreServiceJDBC;
+import sk.tsystems.gamestudio.service.ScoreService.ScoreService;
+import sk.tsystems.gamestudio.service.ScoreService.ScoreServiceJDBC;
 
-public class PuzzleConsoleUI {
+public class PuzzleConsoleUI implements Game {
+
 	private Field field;
-	
-	private ScoreService scoreService = new ScoreServiceJDBC(); 
+
+	private long time;
+
+	private int score;
+
+	private long initialTime;
+
+	@Autowired
+	private ScoreService scoreService;
 
 	public PuzzleConsoleUI() {
-		field = new Field(2, 2);
 	}
 
 	public void play() {
+		field = new Field(2, 2);
 		printScores();
+		initialTime = System.currentTimeMillis();
 		print();
-		while (!field.isSolved()) {
+		do {
 			processInput();
 			print();
+		} while (!field.isSolved());
+		if (field.isSolved()) {
+			System.out.println("You won! CONGRATULATION!!!");
+			time = (System.currentTimeMillis() - initialTime) / 1000;
+			score = 500 - (int) time;
+			System.out.println("You solved the game in " + (time) + " sec. Score = " + score);
+			scoreService.addScore(new Score("Puzzle", System.getProperty("user.name"), score, new Date()));
 		}
-		System.out.println("You won!");
-		System.out.println("Your score is " + field.getScore());
-		scoreService.addScore(new Score("Puzzle",System.getProperty("user.name"), field.getScore(), new Date()));
 	}
 
 	private void print() {
@@ -49,26 +64,32 @@ public class PuzzleConsoleUI {
 		System.out.print("Enter tile number: ");
 		Scanner scanner = new Scanner(System.in);
 		String line = scanner.nextLine().toUpperCase().trim();
-		if("X".equals(line))
+		if ("X".equals(line))
 			System.exit(0);
 		try {
 			int value = Integer.parseInt(line);
-			if(!field.moveTile(value))
+			if (!field.moveTile(value))
 				System.err.println("Tile not moved!");
 		} catch (NumberFormatException e) {
 			System.err.println("Invalid tile number!");
 		}
 	}
-	
+
 	private void printScores() {
 		int index = 1;
 		System.out.println("-----------------------------");
 		System.out.println("No.  Player             Score");
 		System.out.println("-----------------------------");
-		for(Score score : scoreService.getBestScores("Puzzle")) {
-			System.out.printf("%3d. %-16s %5d\n", index, score.getPlayer(), score.getPoints());
+		for (Score score : scoreService.getBestScores("Puzzle")) {
+			System.out.printf("%3d. %-16s %5d\n", index, score.getUsername(), score.getPoints());
 			index++;
 		}
 		System.out.println("-----------------------------");
 	}
+
+	@Override
+	public String getGame() {
+		return "Puzzle";
+	}
+
 }

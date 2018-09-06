@@ -10,4 +10,10 @@ public abstract class Tile {
 	void setState(TileState state) {
 		this.state = state;
 	}
+	
+	 @Override
+	    public String toString() {
+	        return this.state == TileState.CLOSED ? "-" : "M";
+	    }
+
 }

@@ -1,0 +1,63 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Gamestudio</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+<link rel="stylesheet" href="/css/stylesheet.css" />
+</head>
+<body>
+	<div th:if="${@userController.logged}">
+		Welcome to <a href="/">Gamestudio</a>.
+		<div th:if="${@userController.logged}"> You are logged as 
+		<span id="username" th:text="${@userController.loggedUsername}"></span>
+		</div>
+		<div><a href="/logout">Logout</a></div>
+	
+	</div>
+	
+	<div th:unless="${@userController.logged}">
+		Welcome to <a href="/">Gamestudio</a>.
+		<br />
+		
+	
+		<h2>Login</h2>
+		<form action="/login" method="POST">
+			<div>
+				<label>Username</label> <input type="text" name="username"
+					required="required" />
+			<span>
+				<label>Password</label> <input type="password" name="password"
+					required="required" />
+			</span>
+			<span>
+				<input type="submit" value="Login" />
+			</span>
+			</div>
+		</form>
+		<br />
+
+		<h2>or Register</h2>
+		<form action="/register" method="POST">
+			<div>
+				<label>Username</label> <input type="text" name="username"
+					required="required" />
+			<span>
+				<label>Password</label> <input type="password" name="password"
+					required="required" />
+			</span>
+			<span>
+				<label>Repeat password</label> <input type="password"
+					name="repeatPassword" required="required" />
+			</span>
+			
+			<span th:if="${registerMessage}" th:text="${registerMessage}"
+				class="error-message">here goes message</span>
+			<span>
+				<input type="submit" value="Register" />
+			</span>
+			</div>
+		</form>
+	</div>
+</body>
+</html>

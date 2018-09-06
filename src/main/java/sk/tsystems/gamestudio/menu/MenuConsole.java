@@ -1,74 +1,105 @@
 package sk.tsystems.gamestudio.menu;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.util.Scanner;
 
-import sk.tsystems.gamestudio.game.GuessANumber.GuessnumberMain;
-import sk.tsystems.gamestudio.game.mines.MinesMain;
-import sk.tsystems.gamestudio.game.puzzle.PuzzleMain;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import sk.tsystems.gamestudio.game.Game;
 
 public class MenuConsole {
-	private static GuessnumberMain guessANumberMain = new GuessnumberMain();
-	private static MinesMain minesMain = new MinesMain();
-	private static PuzzleMain puzzleMain = new PuzzleMain();
-	
-	private static BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
+//automaticky vlozi vsetky triedy, ktore su zavedene ako Bean a implementuju Game rozhranie 
 
-	private enum Option {
-		GUESS_A_NUMBER, PUZZLE, MINES, EXIT
-	};
-	public static void main(String[] args) {
-		run();
+	@Autowired
+	private Game[] games;
 	
-	}
-	public static void run() {
+//	private BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
+
+//	private enum Option {
+//		GUESS_A_NUMBER, PUZZLE, MINES, EXIT
+//	};
+
+	public void run() {
+		Scanner scanner = new Scanner(System.in);
 		while (true) {
-			switch (showMenu()) {
-			case GUESS_A_NUMBER:
-				guessANumberMain.guessANumber();
-				break;
-			case PUZZLE:
-				puzzleMain.puzzle();
-				break;
-			case MINES:
-				minesMain.mines();
-				break;
-			case EXIT:
-				return;
-			}
-		}
-	
-	}
-	
-	private static String readLine() {
-		// In JDK 6.0 and above Console class can be used
-		// return System.console().readLine();
-
-		try {
-			return input.readLine();
-		} catch (IOException e) {
-			return null;
-		}
-	}
-	
-	private static Option showMenu() {
-		System.out.println("Menu.");
-		for (Option option : Option.values()) {
-			System.out.printf("%d. %s%n", option.ordinal() + 1, option);
-		}
-		System.out.println("-----------------------------------------------");
-
-		int selection = -1;
-		do {
-			System.out.println("Option: ");
 			try {
-				selection = Integer.parseInt(readLine());
-			} catch (NumberFormatException e) {
-				System.err.println("Invalid index, enter only numbers you can see in menu!");
+				System.out.println("Choose a game:");
+				System.out.println("0. Exit gamestudio");
+				for (int i = 0; i < games.length; i++) {
+					System.out.println((i + 1) +". "+ games[i].getGame());
+				}
+				
+				int input = Integer.parseInt(scanner.nextLine());
+				if (input == 0) {
+					return; //ukonci cely run(), teda aj while cyklus
+				}
+				if (input > 0 && input <= games.length) {
+					games[input-1].play();
+				} else {
+					System.out.println("Wrong input, try again.");
+				}
+			} catch (Exception ex) {
+				System.out.println("Error: "+ex.getMessage());
 			}
-		} while (selection <= 0 || selection > Option.values().length);
-
-		return Option.values()[selection - 1];
+		}
 	}
+
+			
+//			switch (showMenu()) {
+//			case GUESS_A_NUMBER:
+//				guessANumberConsoleUI.play();
+//				break;
+//			case PUZZLE:
+//				puzzleConsoleUI.play();
+//				break;
+//			case MINES:
+//				minesConsoleUI.play();
+//				break;
+//			case EXIT:
+//				return;
+//			}
+//		}
+	
+//	}
+	
+//	private String readLine() {
+//		// In JDK 6.0 and above Console class can be used
+//		// return System.console().readLine();
+//
+//		try {
+//			return input.readLine();
+//		} catch (IOException e) {
+//			return null;
+//		}
+//	}
+//	
+//	private void printMenu() {
+//		System.out.println("0. Exit");
+//		System.out.println("Menu.");
+//		
+//		for (int i = 0; i < games.length; i++) {
+//			System.out.println((i+1) + ". " + games[i].getGame());
+//		}
+//		
+//	}
+	
+	
+//	private Option showMenu() {
+//		System.out.println("Menu.");
+//		for (Option option : Option.values()) {
+//			System.out.printf("%d. %s%n", option.ordinal() + 1, option);
+//		}
+//		System.out.println("-----------------------------------------------");
+//
+//		int selection = -1;
+//		do {
+//			System.out.println("Option: ");
+//			try {
+//				selection = Integer.parseInt(readLine());
+//			} catch (NumberFormatException e) {
+//				System.err.println("Invalid index, enter only numbers you can see in menu!");
+//			}
+//		} while (selection <= 0 || selection > Option.values().length);
+//
+//		return Option.values()[selection - 1];
+//	}
 }

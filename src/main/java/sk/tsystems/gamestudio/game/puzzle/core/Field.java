@@ -8,6 +8,8 @@ public class Field {
 	private final int columnCount;
 
 	private final Tile[][] tiles;
+	
+	private long startMillis;
 
 	private Coordinate emptyCoordinate;
 	
@@ -23,6 +25,7 @@ public class Field {
 	private void generate() {
 		generateInitialPosition();
 		shuffle();
+		startMillis = System.currentTimeMillis();
 		movesCount = 0;
 	}
 
@@ -45,18 +48,6 @@ public class Field {
 			if(moveTile(random.nextInt(rowCount * columnCount - 1) + 1))
 				i++;
 		}
-	}
-
-	public int getRowCount() {
-		return rowCount;
-	}
-
-	public int getColumnCount() {
-		return columnCount;
-	}
-
-	public Tile getTile(int row, int column) {
-		return tiles[row][column];
 	}
 	
 	private Coordinate getTile(int value) {
@@ -100,7 +91,24 @@ public class Field {
 		return true;
 	}
 	
-	public int getScore() {
-		return rowCount * columnCount * 100 - movesCount;
+	public int getPlayingTime() {
+		 return ((int) (System.currentTimeMillis() - startMillis)) / 1000;
+    }
+
+    public int getScore() {
+    	return rowCount * columnCount * 20 - getPlayingTime();
+    }
+    
+    public int getRowCount() {
+		return rowCount;
+	}
+
+	public int getColumnCount() {
+		return columnCount;
+	}
+
+	public Tile getTile(int row, int column) {
+		return tiles[row][column];
 	}
 }
+

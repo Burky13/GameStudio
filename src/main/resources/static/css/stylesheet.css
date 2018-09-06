@@ -1,0 +1,274 @@
+/**
+ * Copyright (c) 2014 Oracle and/or its affiliates. All rights reserved.
+ *
+ * You may not modify, use, reproduce, or distribute this software except in
+ * compliance with  the terms of the License at:
+ * http://java.net/projects/javaeetutorial/pages/BerkeleyLicense
+ */
+#top {
+	position: relative;
+	background-color: #036fab;
+	color: white;
+	padding: 5px;
+	margin: 0px 0px 10px 0px;
+}
+
+body {
+	background-image: url("backgrounds/casino.jpg");
+	background-size: cover;
+	font-size: 12px;
+	font-family: Verdana, "Verdana CE", Arial, "Arial CE", "Helvetica CE",
+		sans-serif;
+	color: #59cef0;
+	margin: 10px;
+	background-attachment: fixed;
+}
+
+h1 {
+	font-family: Arial, "Arial CE", "Helvetica CE", sans-serif;
+	font-size: 28px;
+	font-weight: bold;
+	margin: 0px;
+	padding: 0px;
+	color: #9933ff;
+}
+
+h2 {
+	font-family: Arial, "Arial CE", "Helvetica CE", sans-serif;
+	font-size: 16px;
+	font-weight: bold;
+	margin: 0px;
+	padding: 0px;
+	color: #59cef0;
+}
+
+a:link, a:visited {
+	color: fuchsia;
+	font-weight: bold;
+	text-decoration: none;
+}
+
+a:link:hover, a:visited:hover {
+	color: #2ba2f9;
+	font-weight: bold;
+	text-decoration: underline;
+}
+
+.center_content {
+	position: relative;
+	background-color: #e0e0e0;
+	padding: 5px;
+}
+
+.error-message {
+	color: #ff0d0d;
+	font-family: 'New Century Schoolbook', serif;
+	font-style: oblique;
+	text-decoration: overline;
+	font-size: medium;
+}
+
+.list-background {
+	background-color: #ffffff;
+	font-family: sans-serif;
+	font-size: 12pt;
+	padding: 10px;
+	width: 100%;
+}
+
+.list-caption {
+	font-family: sans-serif;
+	font-size: 12pt;
+	font-weight: bold;
+	padding: 5px;
+	text-align: center;
+}
+
+.list-column-center {
+	text-align: center;
+	width: 15%;
+}
+
+.list-column-left {
+	text-align: left;
+	width: 70%;
+}
+
+.list-column-right {
+	text-align: right;
+	width: 15%;
+}
+
+.list-footer {
+	background-color: #A5A5A5;
+	color: #000000;
+	font-weight: bold;
+	text-align: center;
+}
+
+.list-header {
+	background-color: #ffffff;
+	color: #000000;
+	text-align: center;
+}
+
+.list-row-even {
+	
+}
+
+.list-row-odd {
+	background-color: #eaf1f8;
+}
+
+.special-offer {
+	font-family: sans-serif;
+	font-size: 12pt;
+	text-align: left;
+	padding: 10px;
+}
+
+.mines_field {
+	border-collapse: collapse;
+	border: none;
+}
+
+.mines_field td {
+	padding: 0;
+	border: none;
+}
+
+.puzzle_field {
+	font-size: 30pt;
+	border: 1px;
+	padding: 10;
+	table-layout: fixed;
+}
+
+.puzzle_field td {
+	padding: 5px;
+	width: 60px;
+	border-style: solid;
+	border-color: #1daf27;
+	border-width: 5px;
+	text-align: center;
+	background-color: black;
+}
+
+.tictactoe_field {
+	font-size: 10pt;
+	border: 1px;
+	padding: 10;
+	table-layout: fixed;
+}
+
+.tictactoe_field td {
+	padding: 5px;
+	width: 20px;
+	border-style: solid;
+	border-color: #1a9923;
+	border-width: 2px;
+	text-align: center;
+	background-color: black;
+}
+
+.score_table {
+	font-size: 12pt;
+	border: 1px;
+	padding: 10;
+	table-layout: fixed;
+}
+
+.score_table tr:nth-child(even) {
+	background-color: #f2f2f2;
+}
+
+div.stars {
+	width: 270px;
+	display: inline-block;
+}
+
+input.star {
+	display: none;
+}
+
+label.star {
+	float: right;
+	padding: 10px;
+	font-size: 20px;
+	color: yellow;
+	transition: all .2s;
+}
+
+input.star:checked ~ label.star:before {
+	content: '\f005';
+	color: #FD4;
+	transition: all .25s;
+}
+
+input.star-5:checked ~ label.star:before {
+	color: #FE7;
+	text-shadow: 0 0 20px #952;
+}
+
+input.star-1:checked ~ label.star:before {
+	color: #F62;
+}
+
+label.star:hover {
+	transform: rotate(-15deg) scale(1.3);
+}
+
+label.star:before {
+	content: '\f006';
+	font-family: FontAwesome;
+}
+
+.menu {
+    text-align: left;
+    padding-left: 0.5em;
+	color: yellow;
+}
+
+#username {
+	color: fuchsia;
+}
+
+#ratingStars {
+	background-color: transparent;
+}
+
+#submitButton {
+	background-color: transparent;
+}
+
+.description {
+	color:  white;
+}
+
+.userBackground {
+	background-color: black;
+	width: 400px
+}
+
+.commentBackground {
+	background-color: purple;
+}
+
+.timestampBackground {
+	background-color: black;
+	
+}
+
+#avgrat {
+	align-content: flex-start;
+}
+
+.startpageRating {
+	color: lime;
+	text-align: left;
+	font-size: xx-small;
+}
+
+.scoretable {
+	background-color: black;
+}

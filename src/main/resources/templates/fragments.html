@@ -1,0 +1,107 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+	<div th:fragment="header">
+		<h3 align="center">Welcome to<br/></h3> <h1 align="center"><a href="/">Gamestudio!</a></h1>
+		<div align="right"><a href="/login" th:unless="${@userController.logged}">Login or register.</a></div> 
+		<div align="right" th:if="${@userController.logged}"> You are logged as 
+			<span id="username" th:text="${@userController.loggedUsername}"></span>
+			</div>
+			<div align="right"><a href="/logout">Logout</a>
+			</div>
+<!-- 		<hr /> -->
+	</div>
+	
+	<div align="center" th:fragment="score(gameName)">
+<!-- 		<hr /> -->
+		<h3>Best scores</h3>
+		<table>
+			<tr th:each="score: ${@scoreService.getBestScores(gameName)}">
+				<td class="scoretable" th:text="${score.username}" />
+				<td class="scoretable" th:text="${score.points}" />
+			</tr>
+		</table>
+<!-- 		<hr /> -->
+	</div>
+	
+<!-- 	<hr />	 -->
+	<div align="center" th:fragment="scoreGuess(gameName)">
+		<h3>Best scores</h3>
+		<table>
+			<tr th:each="scoreGuess: ${@scoreService.getGuessScores(gameName)}">
+				<td class="scoretable" th:text="${scoreGuess.username}" />
+				<td class="scoretable" th:text="${scoreGuess.points}" />
+			</tr>
+		</table>
+<!-- 	<hr /> -->
+	</div>
+
+	<div align="center" th:fragment="comment(gameName)">
+		<h3>Other comments</h3>
+<!-- 		<hr /> -->
+		<table>
+			<tr th:each="comment: ${@commentService.getComments(gameName)}">
+				<td class="userBackground" th:text="${comment.userName}"></td>
+				<td class="timestampBackground" th:text="${comment.commented_on}"></td>
+			<tr>
+				<td class="commentBackground" th:text="${comment.text}"></td>
+			</tr>
+			</tr>
+		</table>
+	</div>
+	
+	<div align="center" th:fragment="addComment(gameName)">
+		<h3>Add comment</h3>
+<!-- 		<hr /> -->
+		<form action="/comment" method="post">
+			<input type="hidden" name="game" th:value="${gameName}" />
+			<table>
+				<tr>
+					<td><textarea type="text" name="text" required="required" cols="50" rows="5" placeholder="Type your comment here."/></td>
+				</tr>
+				<tr>
+					<td align="center" id="submitButton"><input type="submit" value="Add comment" required="required"/></td>
+				</tr>
+			</table>
+		</form>
+<!-- 		<hr /> -->
+	</div>
+	
+	<div th:fragment="addRating(gameName)">
+		<h3 align="center">Add rating</h3>
+<!-- 		<hr /> -->
+		<div align="center">
+		<form action="/rating" method="post" >
+			<input type="hidden" name="game" th:value="${gameName}" />
+			<table>
+				<tr>
+					<td>
+						<input class="star star-5" id="star-5" type="radio" value="5" name="userRating" required="required"/>
+						<label class="star star-5" for="star-5"></label>
+						<input class="star star-4" id="star-4" type="radio" value="4" name="userRating" required="required"/>
+						<label class="star star-4" for="star-4"></label>
+						<input class="star star-3" id="star-3" type="radio" value="3" name="userRating" required="required"/>
+						<label class="star star-3" for="star-3"></label>
+						<input class="star star-2" id="star-2" type="radio" value="2" name="userRating" required="required"/>
+						<label class="star star-2" for="star-2"></label>
+						<input class="star star-1" id="star-1" type="radio" value="1" name="userRating" required="required"/>
+						<label class="star star-1" for="star-1"></label>
+					</td>
+				</tr>
+				<tr>
+					<td align="center" id="submitButton"><input id="skuska" type="submit" value="Add rating" required="required"/></td>
+				</tr>
+			</table>
+		</form>
+	</div>
+	</div>
+	<div align="center" th:fragment="rating(gameName)">
+		<h3>Average rating</h3>
+		<span th:text="${@ratingService.getRating(gameName)}"></span>
+<!-- 		<hr /> -->
+	</div>
+	<div class="startpageRating" th:fragment="startpageRating(gameName)">
+		<h3>Game rating: </h3>
+		<span th:text="${@ratingService.getRating(gameName)}"></span>
+<!-- 		<hr /> -->
+	</div>
+</html>

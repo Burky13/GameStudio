@@ -1,0 +1,36 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Puzzle</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+<link rel="stylesheet" href="/css/stylesheet.css" />
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css"/>
+</head>
+<body>
+	<div th:replace="fragments::header"></div>
+	<br />
+	<br />
+	<h1 align="center">Puzzle</h1>
+	<div align="center"><a href="/puzzleNew">New Game</a>
+	<br />
+	<a href="/puzzleChangeDifficulty">Set difficulty</a>
+	<br />
+	</div>
+	<div align="center">
+		State: <span th:text="${@puzzleController.GameState}"></span>
+	</div>
+	<div align="center" th:utext="${@puzzleController.getHTMLField()}" />
+	
+	<div th:replace="fragments::rating('puzzle')"></div>
+	
+	<div th:replace="fragments::addRating('puzzle')"></div>
+	
+	<div th:replace="fragments::score('puzzle')"></div>
+	
+	<div th:replace="fragments::addComment('puzzle')"></div>
+	
+	<div th:replace="fragments::comment('puzzle')"></div>
+		
+</body>
+</html>
